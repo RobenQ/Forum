@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.forum.mapper.PostMapper">
+  
+  <resultMap type="com.forum.bean.Post" id="postMap">
+  	<result property="belong" column="belong"/>
+  	<result property="sendTime" column="send_time"/>
+  	<result property="watched" column="watched"/>
+  	<result property="praise" column="praise"/>
+  	<result property="reply" column="reply"/>
+  	<result property="title" column="title"/>
+  	<result property="block" column="block"/>
+  	<result property="type" column="type"/>
+  	<result property="fujian" column="fujian"/>
+  	<result property="context" column="context"/>
+  	<result property="uuid" column="uuid"/>
+  </resultMap>
+  
+  <select id="selAllPost" resultMap="postMap">
+  	select * from post;
+  </select>
+  
+  <select id="selAllByBlock" resultMap="postMap">
+  	select * from post where block=#{block};
+  </select>
+  
+  <insert id="newPost">
+	insert into post values(#{belong},#{sendTime},#{watched},#{praise},#{reply},
+	#{title},#{block},#{type},#{fujian},#{context},#{uuid});
+  </insert>
+  
+  <select id="selPostByUUID" resultMap="postMap">
+  	select * from post where uuid=#{uuid};
+  </select>
+  
+  <update id="updateWatched">
+  	update post set watched=watched+1 where uuid=#{uuid};
+  </update>
+  
+  <update id="updatePraise">
+  	update post set praise=praise+1 where uuid=#{uuid};
+  </update>
+  
+  <update id="updateReply">
+  	update post set reply=reply+1 where uuid=#{uuid};
+  </update>
+</mapper>

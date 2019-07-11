@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.forum.mapper.PraiseMapper">
+	<resultMap type="com.forum.bean.Praise" id="praiseMap">
+		<result property="belong" column="belong"/>
+		<result property="postUuid" column="post_uuid"/>
+		<result property="replyUuid" column="reply_uuid"/>
+		<result property="statusPost" column="status_post"/>
+		<result property="statusReply" column="status_reply"/>
+	</resultMap>
+	
+	<select id="selByPostUuid" resultMap="praiseMap">
+		select * from praise where belong=#{belong} and post_uuid=#{uuid};
+	</select>
+	
+	<select id="selByReplyUuid" resultMap="praiseMap">
+		select * from praise where belong=#{belong} and reply_uuid=#{uuid};
+	</select>
+	
+	<insert id="praisePost">
+		insert into praise values(#{belong},#{postUuid},#{replyUuid},#{statusPost},#{statusReply});
+	</insert>
+	
+	<insert id="praiseReply">
+		insert into praise values(#{belong},#{postUuid},#{replyUuid},#{statusPost},#{statusReply});
+	</insert>
+	
+	<update id="updatePostPraise">
+		update praise set status_post=ABS(status_post-1) where belong=#{belong} and post_uuid=#{postUuid};
+	</update>
+	
+	<update id="updateReplyPraise">
+		update praise set status_reply=ABS(status_reply-1) where belong=#{belong} and reply_uuid=#{replyUuid};
+	</update>
+</mapper>

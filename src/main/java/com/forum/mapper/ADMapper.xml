@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.forum.mapper.ADMapper">
+	<resultMap type="com.forum.bean.AD" id="ADMap">
+		<result property="belong" column="belong"/>
+		<result property="image" column="image"/>
+  		<result property="sendTime" column="send_time"/>
+  		<result property="watched" column="watched"/>
+  		<result property="praise" column="praise"/>
+  		<result property="reply" column="reply"/>
+  		<result property="title" column="title"/>
+  		<result property="block" column="block"/>
+  		<result property="type" column="type"/>
+  		<result property="fujian" column="fujian"/>
+  		<result property="context" column="context"/>
+  		<result property="uuid" column="uuid"/>
+	</resultMap>
+	
+	<select id="selAll" resultMap="ADMap">
+		select * from ad;
+	</select>
+	<select id="selByUuid" resultMap="ADMap">
+		select * from ad where uuid=#{uuid};
+	</select>
+	<update id="addWatched">
+		update ad set watched=(watched+1) where uuid=#{uuid};
+	</update>
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.forum.mapper.BlockMapper">
+	
+	<resultMap type="com.forum.bean.Block" id="blockMap">
+		<result property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="admin" column="admin"/>
+		<result property="image" column="image"/>
+		<result property="num" column="num"/>
+		<result property="focus" column="focus"/>
+		<result property="uuid" column="uuid"/>
+	</resultMap>
+	
+	<select id="selAllBlock" resultMap="blockMap">
+		select * from block;
+	</select>
+	
+	<select id="selBlockByUuid" resultMap="blockMap">
+		select * from block where uuid=#{uuid};
+	</select>
+	
+	<select id="selBlockByName" resultMap="blockMap">
+		select * from block where name=#{name};
+	</select>
+	
+	<update id="addFocus">
+		update block set focus=focus+1 where uuid=#{uuid};
+	</update>
+	
+	<update id="cutFocus">
+		update block set focus=focus-1 where uuid=#{uuid};
+	</update>
+	
+	<update id="addNum">
+		update block set num=num+1 where uuid=#{uuid};
+	</update>
+	
+	<update id="cutNum">
+		update block set num=num-1 where uuid=#{uuid};
+	</update>
+</mapper>

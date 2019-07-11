@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.forum.mapper.UserBlockMapper">
+
+  <resultMap type="com.forum.bean.UserBlock" id="userBlockMap">
+  	<result property="studeid" column="stude_id"/>
+  	<result property="blockName" column="block_name"/>
+  </resultMap>
+  
+  <select id="followingBlock" resultMap="userBlockMap">
+  	select * from user_block where stude_id=#{studeid};
+  </select>
+  
+  <insert id="addFollowingBlock">
+  	insert into user_block values(#{studeid},#{blockName});
+  </insert>
+  
+  <delete id="cutFollowingBlock">
+  	delete from user_block where stude_id=#{studeid} and block_name=#{blockName};
+  </delete>
+  
+  <select id="selUserBlock" resultMap="userBlockMap">
+  	select * from user_block where stude_id=#{studeid} and block_name=#{blockName};
+  </select>
+</mapper>

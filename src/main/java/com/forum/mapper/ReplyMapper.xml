@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.forum.mapper.ReplyMapper">
+	
+	<resultMap type="com.forum.bean.Reply" id="replyMap">
+		<result property="belong" column="belong"/>
+		<result property="sendTime" column="send_time"/>
+		<result property="context" column="context"/>
+		<result property="uuid" column="uuid"/>
+		<result property="watched" column="watched"/>
+		<result property="reply" column="reply"/>
+		<result property="praise" column="praise"/>
+		<result property="myUuid" column="myuuid"/>
+	</resultMap>
+	
+	<select id="selReplyByUuid" resultMap="replyMap">
+		select * from reply where uuid=#{uuid};
+	</select>
+	
+	<insert id="newReply">
+		insert into reply values(#{belong},#{sendTime},#{context},#{uuid},#{watched},#{reply},#{praise},#{myUuid});
+	</insert>
+</mapper>

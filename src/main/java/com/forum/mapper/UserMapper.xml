@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.forum.mapper.UserMapper">
+	<resultMap type="com.forum.bean.User" id="userMap">
+		<result property="name" column="name"/>
+		<result property="password" column="password"/>
+		<result property="stuID" column="stude_id"/>
+		<result property="grade" column="grade"/>
+		<result property="access" column="access"/>
+		<result property="sendNum" column="send_num"/>
+		<result property="replyNum" column="reply_num"/>
+		<result property="praiseNum" column="praise_num"/>
+		<result property="image" column="image"/>
+		<result property="markToday" column="mark_today"/>
+		<result property="markSum" column="mark_sum"/>
+		<result property="experience" column="experience"/>
+	</resultMap>
+	
+	<select id="login" resultMap="userMap">
+		select * from user where name=#{name} and password=#{password};
+	</select>
+</mapper>
